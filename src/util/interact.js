@@ -3,16 +3,8 @@ const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY;
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(alchemyKey);
 
-const contractABI = require("../contract-abi.json");
-const contractAddress = "0x0E6b9b5CE0D05bd0bEa7114699d6233CE487A9cA";
-
 const votingContractABI = require("../voting-contract-abi.json");
-const votingContractAddress = "0x3eC6a2702bCC1324C7169dFC4D38249589Be1Fe8";
-
-export const helloWorldContract = new web3.eth.Contract(
-    contractABI,
-    contractAddress
-  );
+const votingContractAddress = "0x2Ad92F7ABfD96C1a304bf56B18b986dCBDFf9ad2";
 
 export const votingContract = new web3.eth.Contract(
     votingContractABI,
@@ -28,7 +20,6 @@ export const loadOptions = async () => {
   const o = await votingContract.methods.getPeopleNames().call(); 
   return o;
 };
-
 
 export const connectWallet = async () => {
   if (window.ethereum) {
@@ -138,7 +129,7 @@ export const vote = async (address, name) => {
       return {
         status: (
             <span>
-            ✅{" "}
+            ✅{"  "}
             <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
                 View the status of your transaction on Etherscan!
             </a>
@@ -185,14 +176,7 @@ export const addPerson = async (address, name) => {
       params: [transactionParameters],
       });
       return {
-        status: (
-            <span>
-            ✅{" "}
-            <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
-                View the status of your transaction on Etherscan!
-            </a>
-            </span>
-        ),
+        status: (`https://ropsten.etherscan.io/tx/${txHash}`),
       };
     } catch (error) {
         return {
