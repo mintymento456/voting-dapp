@@ -161,7 +161,7 @@ const HelloWorld = () => {
                     onChange={(e) => setNewMessage(e.target.value)}
                     value={newMessage}
                   />
-                  <button id="register" onClick={onRegisterPressed} style={{ marginTop: "10px", marginLeft: "25px" }} >
+                  <button id="register" onClick={onRegisterPressed} style={{ marginTop: "10px"}} >
                     Nominate
                   </button>
                   
