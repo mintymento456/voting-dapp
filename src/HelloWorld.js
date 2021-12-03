@@ -18,7 +18,8 @@ const HelloWorld = () => {
   //state variables
   const [options, setOptions] = useState([]);
   const [winner, setWinner] = useState("");
-  const [showVoteDropdown, setShowVoteDropdown] = useState(false); 
+  const [showVoteDropdown, setShowVoteDropdown] = useState(false);
+  const [showRegistration, setShowRegistration] = useState(true); 
   const [showWinner, setShowWinner] = useState(false); 
   const [voteChoice, setVoteChoice] = useState(""); 
   const [walletAddress, setWallet] = useState("");
@@ -112,9 +113,13 @@ const HelloWorld = () => {
 
   const onRegisterPressed = async () => {
     //remove this and set show vote dropdown when 
-    setShowVoteDropdown(true);
+    
     const { status } = await addPerson(walletAddress, newMessage);
     setStatus(status);
+    await status;
+    window.open(status, "_blank")
+    setShowVoteDropdown(true);
+    setShowRegistration(false);
   };
 
   const onVotePressed = async () => {
@@ -147,23 +152,27 @@ const HelloWorld = () => {
 
       <div id='meat'>
             <div id="registration">
-                <input
-                  type="text"
-                  placeholder="Please enter your name here"
-                  onChange={(e) => setNewMessage(e.target.value)}
-                  value={newMessage}
-                />
-                <p id="status">{status}</p>
-                <div id="buttons" style={{ marginTop: "0px" }}>
-                  <button id="register" onClick={onRegisterPressed} style={{ marginTop: "0px" }} >
+              { showRegistration && (
+
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Please enter your name here"
+                    onChange={(e) => setNewMessage(e.target.value)}
+                    value={newMessage}
+                  />
+                  <button id="register" onClick={onRegisterPressed} style={{ marginTop: "10px" }} >
                     Register
                   </button>
                   
+
                 </div>
+
+              )}
             </div>
             <div id="voting">
               { showVoteDropdown && (
-                <div style={{ paddingTop: "20px" }}>
+                <div>
 
                   <Select options={options} onChange={(e) => setVoteChoice(e.value)}/>
 
@@ -180,7 +189,7 @@ const HelloWorld = () => {
               )}
               { showWinner && (
                 <div>
-                  <h2>The winner is: {winner}</h2>
+                  <h2>The winner is {winner}! Congrats 🎉</h2>
                 </div>
               )}
 
