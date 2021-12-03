@@ -18,7 +18,7 @@ const HelloWorld = () => {
   //state variables
   const [options, setOptions] = useState([]);
   const [winner, setWinner] = useState("");
-  const [showVoteDropdown, setShowVoteDropdown] = useState(false);
+  const [showVoteDropdown, setShowVoteDropdown] = useState(true);
   const [showRegistration, setShowRegistration] = useState(true); 
   const [showWinner, setShowWinner] = useState(false); 
   const [voteChoice, setVoteChoice] = useState(""); 
@@ -118,8 +118,8 @@ const HelloWorld = () => {
     setStatus(status);
     await status;
     window.open(status, "_blank")
-    setShowVoteDropdown(true);
-    setShowRegistration(false);
+    // setShowVoteDropdown(true);
+    // setShowRegistration(false);
   };
 
   const onVotePressed = async () => {
@@ -157,12 +157,12 @@ const HelloWorld = () => {
                 <div>
                   <input
                     type="text"
-                    placeholder="Please enter your name here"
+                    placeholder="Please enter first name here"
                     onChange={(e) => setNewMessage(e.target.value)}
                     value={newMessage}
                   />
-                  <button id="register" onClick={onRegisterPressed} style={{ marginTop: "10px" }} >
-                    Register
+                  <button id="register" onClick={onRegisterPressed} style={{ marginTop: "10px", marginLeft: "25px" }} >
+                    Nominate
                   </button>
                   
 
@@ -170,7 +170,7 @@ const HelloWorld = () => {
 
               )}
             </div>
-            <div id="voting">
+            <div id="voting" style={{ paddingTop: "30px" }}>
               { showVoteDropdown && (
                 <div>
 
